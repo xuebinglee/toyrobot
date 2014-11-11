@@ -64,4 +64,20 @@ describe Robot do
       end
     end
   end
+
+  describe '#report' do
+    it 'returns nothing when robot is not placed' do
+      @robot.report.must_be_nil
+    end
+
+    it 'returns nothing when robot is placed off board' do
+      @robot.place_at x_invalid, y_invalid, orientation_valid
+      @robot.report.must_be_nil
+    end
+
+    it 'returns current location and orientation when placed on board' do
+      @robot.place_at x_valid, y_valid, orientation_valid
+      @robot.report.must_equal "#{x_valid}, #{y_valid}, #{orientation_valid.upcase}"
+    end
+  end
 end
