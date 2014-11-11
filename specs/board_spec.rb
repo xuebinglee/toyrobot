@@ -1,9 +1,8 @@
-require 'minitest/spec'
 require 'minitest/autorun'
 require 'board'
 
 describe Board do
-  describe '#initialize' do
+  describe 'setup' do
     before do
       @board = Board.new(5, 5)
     end
