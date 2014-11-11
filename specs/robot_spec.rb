@@ -1,10 +1,11 @@
 require 'minitest/autorun'
+require_relative 'spec_helper'
 require 'board'
 require 'robot'
 
 describe Robot do
   before do
-    @board = Board.new(5, 5)
+    @board = Board.new(BOARD_WIDTH, BOARD_HEIGHT)
     @robot = Robot.new(@board)
   end
 
@@ -18,8 +19,8 @@ describe Robot do
     let(:orientation) { [:north, :east, :south, :west].sample }
     describe 'when initially placed on board' do
       before do
-        @x = rand(0..4)
-        @y = rand(0..4)
+        @x = rand( 0..(BOARD_WIDTH - 1) )
+        @y = rand( 0..(BOARD_HEIGHT - 1) )
         @robot.place_at @x, @y, orientation
       end
 
@@ -38,8 +39,8 @@ describe Robot do
 
     describe 'when initially placed off board' do
       before do
-        @x = [rand(-99..-1), rand(5..99)].sample
-        @y = [rand(-99..-1), rand(5..99)].sample
+        @x = [rand(-99..-1), rand(BOARD_WIDTH..99 )].sample
+        @y = [rand(-99..-1), rand(BOARD_HEIGHT..99)].sample
         @robot.place_at @x, @y, orientation
       end
 
