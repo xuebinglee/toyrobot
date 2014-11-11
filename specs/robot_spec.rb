@@ -15,12 +15,12 @@ describe Robot do
   end
 
   describe '#place_at' do
-    describe 'when placed on board' do
+    let(:orientation) { [:north, :east, :south, :west].sample }
+    describe 'when initially placed on board' do
       before do
         @x = rand(0..4)
         @y = rand(0..4)
-        @orientation = [:north, :east, :south, :west].sample
-        @robot.place_at @x, @y, @orientation
+        @robot.place_at @x, @y, orientation
       end
 
       it 'has the correct X' do
@@ -32,7 +32,33 @@ describe Robot do
       end
 
       it 'has the correct orientation' do
-        @robot.orientation.must_equal @orientation
+        @robot.orientation.must_equal orientation
+      end
+    end
+
+    describe 'when initially placed off board' do
+      before do
+        @x = [rand(-99..-1), rand(5..99)].sample
+        @y = [rand(-99..-1), rand(5..99)].sample
+        @robot.place_at @x, @y, orientation
+      end
+
+      it 'has no X' do
+        @robot.x.must_be_nil
+      end
+
+      it 'has no Y' do
+        @robot.y.must_be_nil
+      end
+
+      it 'has no orientation' do
+        @robot.orientation.must_be_nil
+      end
+    end
+
+    describe 'when placed with invalid attributes' do
+      it 'raises ArgumentError' do
+        skip 'TODO'
       end
     end
   end
