@@ -1,8 +1,8 @@
 class Geometry
   attr_reader :x, :y, :orientation
 
-  def off_board
-    @x.nil? || @y.nil? || @orientation.nil?
+  def on_board
+    (@x != nil) && (@y != nil) && (@orientation != nil)
   end
 
   def set(opts)

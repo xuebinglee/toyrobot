@@ -6,7 +6,7 @@ describe 'Geometry' do
   let(:geometry) { Geometry.new }
 
   it 'is off board when created' do
-    geometry.off_board.must_equal true
+    geometry.on_board.must_equal false
   end
 
   describe 'when asked to change' do
@@ -16,6 +16,10 @@ describe 'Geometry' do
 
     before do
       geometry.set x: x, y: y, orientation: orientation
+    end
+
+    it 'is on board' do
+      geometry.on_board.must_equal true
     end
 
     it 'has the correct value of x' do
