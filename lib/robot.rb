@@ -10,9 +10,9 @@ class Robot
   #   Y: an integer that is between 0 and (@board.height - 1)
   #   orientation: one of :north, :east, :south, and :west
   def place_at(x, y, orientation)
-    # Ignore command if X and/or Y is too smll or too large
-    return if x < 0 or x > (@board.width - 1)
-    return if y < 0 or y > (@board.height - 1)
+    # Ignore command if X and/or Y is negative or off board
+    return unless (0...@board.width).cover? x
+    return unless (0...@board.height).cover? y
     @x = x
     @y = y
     @orientation = orientation
