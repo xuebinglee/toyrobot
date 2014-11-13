@@ -40,19 +40,18 @@ describe Robot do
     end
 
     describe 'when initially placed off board' do
-      before do
-        @robot.place_at x_invalid, y_invalid, orientation_valid
-      end
-
-      it 'has no X' do
+      it 'has no X when X is invalid' do
+        @robot.place_at x_invalid, y_valid, orientation_valid
         @robot.x.must_be_nil
       end
 
-      it 'has no Y' do
+      it 'has no Y when Y is invalid' do
+        @robot.place_at x_valid, y_invalid, orientation_valid
         @robot.y.must_be_nil
       end
 
-      it 'has no orientation' do
+      it 'has no orientation when orientation is invalid' do
+        @robot.place_at x_valid, y_valid, :invalid
         @robot.orientation.must_be_nil
       end
     end
