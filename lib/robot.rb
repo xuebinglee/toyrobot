@@ -21,7 +21,12 @@ class Robot
   # Returns X, Y, and orientation in upper case
   #   e.g. 1, 5, NORTH
   def report
-    return if @x.nil? or @y.nil? or @orientation.nil?
+    return if not_placed
     "#{@x}, #{@y}, #{@orientation.upcase}"
+  end
+
+  private
+  def not_placed
+    @x.nil? or @y.nil? or @orientation.nil?
   end
 end
