@@ -104,4 +104,30 @@ describe Robot do
       @robot.geometry.orientation.must_equal :north
     end
   end
+
+  describe '#right' do
+    it 'should turn to west when initially facing south' do
+      @robot.place_at x: x_valid, y: y_valid, orientation: :south
+      @robot.right
+      @robot.geometry.orientation.must_equal :west
+    end
+
+    it 'should turn to south when initially facing east' do
+      @robot.place_at x: x_valid, y: y_valid, orientation: :east
+      @robot.right
+      @robot.geometry.orientation.must_equal :south
+    end
+
+    it 'should turn to east when initially facing north' do
+      @robot.place_at x: x_valid, y: y_valid, orientation: :north
+      @robot.right
+      @robot.geometry.orientation.must_equal :east
+    end
+
+    it 'should turn to north when initially facing west' do
+      @robot.place_at x: x_valid, y: y_valid, orientation: :west
+      @robot.right
+      @robot.geometry.orientation.must_equal :north
+    end
+  end
 end
