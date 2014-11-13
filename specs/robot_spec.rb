@@ -12,6 +12,10 @@ describe Robot do
     it 'knows the board that it\'s on' do
       @robot.board.must_equal @board
     end
+
+    it 'should have geometry' do
+      @robot.geometry.wont_be_nil
+    end
   end
 
   let(:x_valid) { rand( 0...BOARD_WIDTH ) }
@@ -23,53 +27,53 @@ describe Robot do
   describe '#place_at' do
     describe 'when initially placed on board' do
       before do
-        @robot.place_at x_valid, y_valid, orientation_valid
+        @robot.place_at x: x_valid, y: y_valid, orientation: orientation_valid
+      end
+
+      it 'should be on board' do
+        @robot.geometry.on_board.must_equal true
       end
 
       it 'has the correct X' do
-        @robot.x.must_equal x_valid
+        @robot.geometry.x.must_equal x_valid
       end
 
       it 'has the correct Y' do
-        @robot.y.must_equal y_valid
+        @robot.geometry.y.must_equal y_valid
       end
 
       it 'has the correct orientation' do
-        @robot.orientation.must_equal orientation_valid
+        @robot.geometry.orientation.must_equal orientation_valid
       end
     end
 
     describe 'when initially placed off board' do
-      it 'has no X when X is invalid' do
-        @robot.place_at x_invalid, y_valid, orientation_valid
-        @robot.x.must_be_nil
+      it 'should be off board when x is invalid' do
+        @robot.place_at x: x_invalid, y: y_valid, orientation: orientation_valid
+        @robot.geometry.on_board.must_equal false
       end
 
-      it 'has no Y when Y is invalid' do
-        @robot.place_at x_valid, y_invalid, orientation_valid
-        @robot.y.must_be_nil
-      end
-
-      it 'has no orientation when orientation is invalid' do
-        @robot.place_at x_valid, y_valid, :invalid
-        @robot.orientation.must_be_nil
+      it 'should be off board when Y is invalid' do
+        @robot.place_at x: x_valid, y: y_invalid, orientation: orientation_valid
+        @robot.geometry.on_board.must_equal false
       end
     end
   end
 
   describe '#report' do
-    it 'returns nothing when robot is not placed' do
-      @robot.report.must_be_nil
-    end
-
-    it 'returns nothing when robot is placed off board' do
-      @robot.place_at x_invalid, y_invalid, orientation_valid
+    it 'should not print when robot is not placed' do
       lambda{ @robot.report }.must_be_silent
     end
 
-    it 'returns current location and orientation when placed on board' do
-      @robot.place_at x_valid, y_valid, orientation_valid
-      lambda { @robot.report }.must_output "#{x_valid}, #{y_valid}, #{orientation_valid.upcase}\n"
+    it 'should not print when robot is placed off board' do
+      @robot.place_at x: x_invalid, y: y_invalid, orientation: orientation_valid
+      lambda{ @robot.report }.must_be_silent
+    end
+
+    it 'prints current location and orientation when placed on board' do
+      @robot.place_at x: x_valid, y: y_valid, orientation: orientation_valid
+      lambda { @robot.report }.must_output
+        "#{x_valid}, #{y_valid}, #{orientation_valid.upcase}\n"
     end
   end
 end
