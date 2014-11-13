@@ -5,7 +5,7 @@ require 'robot'
 
 describe Robot do
   before do
-    @board = Board.new(BOARD_WIDTH, BOARD_HEIGHT)
+    @board = Board.new width: BOARD_WIDTH, height: BOARD_HEIGHT
     @robot = Robot.new(@board)
   end
 
