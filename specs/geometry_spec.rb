@@ -12,7 +12,7 @@ describe 'Geometry' do
   describe 'when asked to change' do
     let(:x) { rand(BOARD_WIDTH) }
     let(:y) { rand(BOARD_HEIGHT)}
-    let(:orientation) { [:north, :east, :south, :west].sample }
+    let(:orientation) { ORIENTATIONS.sample }
 
     before do
       geometry.set x: x, y: y, orientation: orientation
