@@ -55,12 +55,6 @@ describe Robot do
         @robot.orientation.must_be_nil
       end
     end
-
-    describe 'when placed with invalid attributes' do
-      it 'raises ArgumentError' do
-        skip 'TODO'
-      end
-    end
   end
 
   describe '#report' do
