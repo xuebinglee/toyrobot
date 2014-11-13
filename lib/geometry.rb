@@ -7,8 +7,8 @@ class Geometry
   end
 
   def set(opts)
-    @x = opts[:x]
-    @y = opts[:y]
-    @orientation = opts[:orientation]
+    @x = opts[:x] || @x
+    @y = opts[:y] || @y
+    @orientation = opts[:orientation] || @orientation
   end
 end
