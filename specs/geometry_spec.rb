@@ -5,7 +5,7 @@ require 'geometry'
 describe 'Geometry' do
   let(:geometry) { Geometry.new }
 
-  it 'is off board when created' do
+  it 'should be off board when created' do
     geometry.on_board.must_equal false
   end
 
@@ -18,19 +18,19 @@ describe 'Geometry' do
       geometry.set x: x, y: y, orientation: orientation
     end
 
-    it 'is on board' do
+    it 'should on board' do
       geometry.on_board.must_equal true
     end
 
-    it 'has the correct value of x' do
+    it 'should have the correct value of x' do
       geometry.x.must_equal x
     end
 
-    it 'has the correct value of y' do
+    it 'should have the correct value of y' do
       geometry.y.must_equal y
     end
 
-    it 'has the correct orientation' do
+    it 'should have the correct orientation' do
       geometry.orientation.must_equal orientation
     end
   end

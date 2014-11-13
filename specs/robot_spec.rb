@@ -9,7 +9,7 @@ describe Robot do
   end
 
   describe 'setup' do
-    it 'knows the board that it\'s on' do
+    it 'should know the board that it\'s on' do
       @robot.board.must_equal @board
     end
 
@@ -20,8 +20,10 @@ describe Robot do
 
   let(:x_valid) { rand( 0...BOARD_WIDTH ) }
   let(:y_valid) { rand( 0...BOARD_HEIGHT) }
-  let(:x_invalid) { [rand(-99..-1), rand(BOARD_WIDTH..(BOARD_WIDTH + 99) )].sample }
-  let(:y_invalid) { [rand(-99..-1), rand(BOARD_HEIGHT..(BOARD_HEIGHT + 99))].sample }
+  let(:x_invalid) { [rand(-99..-1),
+    rand(BOARD_WIDTH..(BOARD_WIDTH + 99) )].sample }
+  let(:y_invalid) { [rand(-99..-1),
+    rand(BOARD_HEIGHT..(BOARD_HEIGHT + 99))].sample }
   let(:orientation_valid) { [:north, :east, :south, :west].sample }
 
   describe '#place_at' do
@@ -34,15 +36,15 @@ describe Robot do
         @robot.geometry.on_board.must_equal true
       end
 
-      it 'has the correct X' do
+      it 'should have the correct value of X' do
         @robot.geometry.x.must_equal x_valid
       end
 
-      it 'has the correct Y' do
+      it 'should have the correct value of Y' do
         @robot.geometry.y.must_equal y_valid
       end
 
-      it 'has the correct orientation' do
+      it 'should have the correct orientation' do
         @robot.geometry.orientation.must_equal orientation_valid
       end
     end
@@ -70,7 +72,7 @@ describe Robot do
       lambda{ @robot.report }.must_be_silent
     end
 
-    it 'prints current location and orientation when placed on board' do
+    it 'should print current location and orientation when placed on board' do
       @robot.place_at x: x_valid, y: y_valid, orientation: orientation_valid
       lambda { @robot.report }.must_output
         "#{x_valid}, #{y_valid}, #{orientation_valid.upcase}\n"
