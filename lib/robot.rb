@@ -1,3 +1,5 @@
+require 'board'
+
 class Robot
   attr_reader :board, :x, :y,:orientation
 

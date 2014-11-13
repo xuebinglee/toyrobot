@@ -1,6 +1,5 @@
 require 'minitest/autorun'
 require_relative 'spec_helper'
-require 'board'
 require 'robot'
 
 describe Robot do
