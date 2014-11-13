@@ -130,4 +130,39 @@ describe Robot do
       @robot.geometry.orientation.must_equal :north
     end
   end
+
+  describe '#move' do
+    describe 'when asked to move on board' do
+      let(:x_inland) { rand(1...(BOARD_WIDTH-1)) }
+      let(:y_inland) { rand(1...(BOARD_HEIGHT-1)) }
+
+      it 'should move in the right direction when facing north' do
+        @robot.place_at x: x_inland, y: y_inland, orientation: :north
+        @robot.move
+        @robot.geometry.y.must_equal (y_inland + 1)
+      end
+
+      it 'should move in the right direction when facing east' do
+        @robot.place_at x: x_inland, y: y_inland, orientation: :east
+        @robot.move
+        @robot.geometry.x.must_equal (x_inland + 1)
+      end
+
+      it 'should move in the right direction when facing south' do
+        @robot.place_at x: x_inland, y: y_inland, orientation: :south
+        @robot.move
+        @robot.geometry.y.must_equal (y_inland - 1)
+      end
+
+      it 'should move in the right direction when facing west' do
+        @robot.place_at x: x_inland, y: y_inland, orientation: :west
+        @robot.move
+        @robot.geometry.x.must_equal (x_inland - 1)
+      end
+    end
+
+    describe 'when asked to move off board' do
+      # TODO
+    end
+  end
 end
