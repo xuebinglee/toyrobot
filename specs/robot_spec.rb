@@ -14,8 +14,8 @@ describe Robot do
     end
   end
 
-  let(:x_valid) { rand( 0..(BOARD_WIDTH - 1) ) }
-  let(:y_valid) { rand( 0..(BOARD_HEIGHT - 1) ) }
+  let(:x_valid) { rand( 0...BOARD_WIDTH ) }
+  let(:y_valid) { rand( 0...BOARD_HEIGHT) ) }
   let(:x_invalid) { [rand(-99..-1), rand(BOARD_WIDTH..(BOARD_WIDTH + 99) )].sample }
   let(:y_invalid) { [rand(-99..-1), rand(BOARD_HEIGHT..(BOARD_HEIGHT + 99))].sample }
   let(:orientation_valid) { [:north, :east, :south, :west].sample }
