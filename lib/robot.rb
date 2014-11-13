@@ -20,6 +20,21 @@ class Robot
     @geometry.set x: opts[:x], y: opts[:y], orientation: opts[:orientation]
   end
 
+  def left
+    orientation =
+      case @geometry.orientation
+      when :north
+        :west
+      when :west
+        :south
+      when :south
+        :east
+      when :east
+        :north
+      end
+    @geometry.set orientation: orientation
+  end
+
   # Returns X, Y, and orientation in upper case
   #   e.g. 1, 5, NORTH
   def report
