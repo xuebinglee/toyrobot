@@ -72,12 +72,12 @@ describe Robot do
 
     it 'returns nothing when robot is placed off board' do
       @robot.place_at x_invalid, y_invalid, orientation_valid
-      @robot.report.must_be_nil
+      lambda{ @robot.report }.must_be_silent
     end
 
     it 'returns current location and orientation when placed on board' do
       @robot.place_at x_valid, y_valid, orientation_valid
-      @robot.report.must_equal "#{x_valid}, #{y_valid}, #{orientation_valid.upcase}"
+      lambda { @robot.report }.must_output "#{x_valid}, #{y_valid}, #{orientation_valid.upcase}\n"
     end
   end
 end

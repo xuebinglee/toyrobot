@@ -22,7 +22,7 @@ class Robot
   #   e.g. 1, 5, NORTH
   def report
     return if not_placed
-    "#{@x}, #{@y}, #{@orientation.upcase}"
+    puts "#{@x}, #{@y}, #{@orientation.upcase}"
   end
 
   private
