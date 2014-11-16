@@ -59,8 +59,6 @@ class Robot
     end
   end
 
-  # Returns X, Y, and orientation in upper case
-  #   e.g. 1, 5, NORTH
   def report
     return unless @geometry.on_board
     puts "#{@geometry.x},#{@geometry.y},#{@geometry.orientation.upcase}"
