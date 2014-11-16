@@ -20,7 +20,7 @@ class Robot
     @geometry.set x: opts[:x], y: opts[:y], orientation: opts[:orientation]
   end
 
-  def left
+  def turn_left
     orientation =
       case @geometry.orientation
       when :north
@@ -35,7 +35,7 @@ class Robot
     @geometry.set orientation: orientation
   end
 
-  def right
+  def turn_right
     orientation =
     case @geometry.orientation
     when :north

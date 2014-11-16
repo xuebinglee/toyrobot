@@ -14,9 +14,9 @@ class Parser
     when 'PLACE'
       place(command)
     when 'LEFT'
-      @robot.left
+      @robot.turn_left
     when 'RIGHT'
-      @robot.right
+      @robot.turn_right
     when 'MOVE'
       @robot.move
     when 'REPORT'
