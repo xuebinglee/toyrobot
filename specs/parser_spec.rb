@@ -48,7 +48,7 @@ describe Parser do
     end
 
     describe 'RIGHT command' do
-      it 'shoudl turn robot right when robot is on board' do
+      it 'should turn robot right when robot is on board' do
         parser.parse 'PLACE 1,2,SOUTH'
         parser.parse 'RIGHT'
         parser.robot.geometry.orientation.must_equal :west
