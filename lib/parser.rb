@@ -10,9 +10,13 @@ class Parser
   end
 
   def parse(command)
-    case command[0..4]
+    case command.split[0]
     when 'PLACE'
       place(command)
+    when 'LEFT'
+      @robot.left
+    when 'RIGHT'
+      @robot.right
     end
   end
 

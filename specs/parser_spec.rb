@@ -31,5 +31,35 @@ describe Parser do
         parser.robot.geometry.on_board.must_equal false
       end
     end
+
+    describe 'LEFT command' do
+      it 'should turn robot left when robot is on board' do
+        parser.parse 'PLACE 1,2,SOUTH'
+        parser.parse 'LEFT'
+        parser.robot.geometry.orientation.must_equal :east
+      end
+
+      it 'should ignore command when robot is off board' do
+        parser.parse 'PLACE 6,0,WEST'
+        parser.parse 'LEFT'
+        parser.robot.geometry.on_board.must_equal false
+        parser.robot.geometry.orientation.must_be_nil
+      end
+    end
+
+    describe 'RIGHT command' do
+      it 'shoudl turn robot right when robot is on board' do
+        parser.parse 'PLACE 1,2,SOUTH'
+        parser.parse 'RIGHT'
+        parser.robot.geometry.orientation.must_equal :west
+      end
+
+      it 'should ignore command when robot is off board' do
+        parser.parse 'PLACE 6,0,WEST'
+        parser.parse 'RIGHT'
+        parser.robot.geometry.on_board.must_equal false
+        parser.robot.geometry.orientation.must_be_nil
+      end
+    end
   end
 end
