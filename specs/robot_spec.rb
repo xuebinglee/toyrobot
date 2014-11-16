@@ -146,8 +146,8 @@ describe Robot do
       it 'should move in the right direction when facing east' do
         @robot.place_at x: x_inland, y: y_inland, orientation: :east
         @robot.move
-        @robot.geometry.y.must_equal y_inland
         @robot.geometry.x.must_equal(x_inland + 1)
+        @robot.geometry.y.must_equal y_inland
       end
 
       it 'should move in the right direction when facing south' do
@@ -160,8 +160,8 @@ describe Robot do
       it 'should move in the right direction when facing west' do
         @robot.place_at x: x_inland, y: y_inland, orientation: :west
         @robot.move
-        @robot.geometry.y.must_equal y_inland
         @robot.geometry.x.must_equal(x_inland - 1)
+        @robot.geometry.y.must_equal y_inland
       end
     end
 
