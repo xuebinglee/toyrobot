@@ -18,7 +18,7 @@ describe Parser do
     let(:parser) { Parser.new }
 
     describe 'PLACE command' do
-      it 'places robot when command is valid' do
+      it 'should place robot when command is valid' do
         parser.parse 'PLACE 0,1,NORTH'
         parser.robot.geometry.on_board.must_equal true
         parser.robot.geometry.x.must_equal 0
@@ -26,7 +26,7 @@ describe Parser do
         parser.robot.geometry.orientation.must_equal :north
       end
 
-      it 'ignores invalid command' do
+      it 'should ignore invalid command' do
         parser.parse 'PLACE 0,6,SOUTH'
         parser.robot.geometry.on_board.must_equal false
       end
