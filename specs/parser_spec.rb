@@ -73,5 +73,21 @@ describe Parser do
         lambda { parser.parse 'REPORT' }.must_be_silent
       end
     end
+
+    describe 'MOVE command' do
+      it 'should move robot as directed given a valid command' do
+        parser.parse 'PLACE 3,0,EAST'
+        parser.parse 'MOVE'
+        parser.robot.geometry.x.must_equal 4
+        parser.robot.geometry.y.must_equal 0
+      end
+
+      it 'should ignore command when off board' do
+        parser.parse 'PLACE 4,0,EAST'
+        parser.parse 'MOVE'
+        parser.robot.geometry.x.must_equal 4
+        parser.robot.geometry.y.must_equal 0
+      end
+    end
   end
 end
