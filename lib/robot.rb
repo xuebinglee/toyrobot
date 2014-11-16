@@ -2,7 +2,7 @@ require 'board'
 require 'geometry'
 
 class Robot
-  attr_reader :board, :geometry
+  attr_reader :geometry
 
   def initialize(board)
     @board = board

@@ -8,14 +8,8 @@ describe Robot do
     @robot = Robot.new(@board)
   end
 
-  describe 'setup' do
-    it 'should know the board that it\'s on' do
-      @robot.board.must_equal @board
-    end
-
-    it 'should have geometry' do
-      @robot.geometry.wont_be_nil
-    end
+  it 'should have geometry' do
+    @robot.geometry.wont_be_nil
   end
 
   let(:x_valid) { rand( 0...BOARD_WIDTH ) }
