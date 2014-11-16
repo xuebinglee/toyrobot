@@ -12,10 +12,16 @@ Optional
 Note that pry and simplecov are NOT needed to run the program.
 
 <h1>Usage</h1>
-Input can be from a file or from standard input. To run the programs,
+Input can be from a file or from standard input. To run the program with a file input,
 
-```shell
+```
 ruby bin/run.rb sample.input
+```
+
+Otherwise, simple run
+
+```
+ruby bin/run.rb
 ```
 
 To run tests,
