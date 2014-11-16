@@ -67,6 +67,6 @@ class Robot
   #   e.g. 1, 5, NORTH
   def report
     return unless @geometry.on_board
-    puts "#{@geometry.x}, #{@geometry.y}, #{@geometry.orientation.upcase}"
+    puts "#{@geometry.x},#{@geometry.y},#{@geometry.orientation.upcase}"
   end
 end

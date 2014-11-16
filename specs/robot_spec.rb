@@ -75,7 +75,7 @@ describe Robot do
     it 'should print current location and orientation when placed on board' do
       @robot.place_at x: x_valid, y: y_valid, orientation: orientation_valid
       lambda { @robot.report }.must_output
-        "#{x_valid}, #{y_valid}, #{orientation_valid.upcase}\n"
+        "#{x_valid},#{y_valid},#{orientation_valid.upcase}\n"
     end
   end
 

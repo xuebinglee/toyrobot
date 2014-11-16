@@ -65,7 +65,7 @@ describe Parser do
     describe 'REPORT command' do
       it 'should report X, Y, and orientation when on board' do
         parser.parse 'PLACE 4,0,EAST'
-        lambda { parser.parse 'REPORT' }.must_output "4, 0, EAST\n"
+        lambda { parser.parse 'REPORT' }.must_output "4,0,EAST\n"
       end
 
       it 'should ignore command when off board' do
