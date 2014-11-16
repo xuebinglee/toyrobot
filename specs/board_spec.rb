@@ -1,5 +1,4 @@
 require_relative 'spec_helper'
-require 'minitest/autorun'
 require 'board'
 
 describe Board do
