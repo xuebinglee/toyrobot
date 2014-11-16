@@ -1,5 +1,5 @@
-require 'minitest/autorun'
 require_relative 'spec_helper'
+require 'minitest/autorun'
 require 'robot'
 
 describe Robot do
