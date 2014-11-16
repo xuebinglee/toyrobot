@@ -2,7 +2,7 @@
 require_relative '../lib/parser'
 
 parser = Parser.new
-ARGF.each do |command|
+ARGF.each do |line|
+  command = line.rstrip
   parser.parse command
-  parser.parse 'REPORT'
 end
