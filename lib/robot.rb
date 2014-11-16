@@ -9,10 +9,6 @@ class Robot
     @geometry = Geometry.new
   end
 
-  # Params
-  #   X: an integer that is between 0 and (@board.width - 1)
-  #   Y: an integer that is between 0 and (@board.height - 1)
-  #   orientation: one of :north, :east, :south, and :west
   def place_at(opts)
     # Ignore command unless
     return unless (0...@board.width).cover?(opts[:x]) && # x is valid and
