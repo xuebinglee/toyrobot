@@ -1,10 +1,9 @@
 require 'robot'
 
 class Parser
-  attr_reader :in_stream, :robot
+  attr_reader :robot
 
   def initialize(opts={})
-    @in_stream = opts[:from] || $stdin
     @board = Board.new
     @robot = Robot.new(@board)
   end

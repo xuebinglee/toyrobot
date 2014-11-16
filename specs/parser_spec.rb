@@ -3,17 +3,6 @@ require 'minitest/autorun'
 require 'parser'
 
 describe Parser do
-  it 'should use stdin as default input stream' do
-    parser = Parser.new
-    parser.in_stream.must_be_same_as $stdin
-  end
-
-  it 'should accept a custom input stream' do
-    $custom = 'something not nil'
-    parser = Parser.new from: $custom
-    parser.in_stream.must_be_same_as $custom
-  end
-
   describe '#parse' do
     let(:parser) { Parser.new }
 
