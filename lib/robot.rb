@@ -1,4 +1,3 @@
-require 'board'
 require 'geometry'
 
 class Robot
@@ -6,18 +5,22 @@ class Robot
 
   def initialize(board)
     @board = board
-    @geometry = Geometry.new
   end
 
   def place_at(opts)
-    # Ignore command unless
-    return unless (0...@board.width).cover?(opts[:x]) && # x is valid and
-      (0...@board.height).cover?(opts[:y]) # y is valid
-    @geometry.set x: opts[:x], y: opts[:y], orientation: opts[:orientation]
+    begin
+      @geometry = Geometry.new board: @board,
+        x: opts[:x],
+        y: opts[:y],
+        orientation: opts[:orientation]
+    rescue ArgumentError # Geometry is off board
+      @geometry = nil
+    end
   end
 
   def turn_left
-    orientation =
+    return unless @geometry # Ignore command unless robot is properly placed
+    @geometry.orientation =
       case @geometry.orientation
       when :north
         :west
@@ -28,39 +31,39 @@ class Robot
       when :east
         :north
       end
-    @geometry.set orientation: orientation
   end
 
   def turn_right
-    orientation =
-    case @geometry.orientation
-    when :north
-      :east
-    when :east
-      :south
-    when :south
-      :west
-    when :west
-      :north
-    end
-    @geometry.set orientation: orientation
+    return unless @geometry # Ignore command unless robot is properly placed
+    @geometry.orientation =
+      case @geometry.orientation
+      when :north
+        :east
+      when :east
+        :south
+      when :south
+        :west
+      when :west
+        :north
+      end
   end
 
   def move
+    return unless @geometry # Ignore command unless robot is properly placed
     case @geometry.orientation
     when :north
-      @geometry.set y: (@geometry.y + 1) if (@geometry.y + 1) < @board.height
+      @geometry.y += 1
     when :south
-      @geometry.set y: (@geometry.y - 1) if (@geometry.y - 1) >= 0
+      @geometry.y -= 1
     when :east
-      @geometry.set x: (@geometry.x + 1) if (@geometry.x + 1) < @board.width
+      @geometry.x += 1
     when :west
-      @geometry.set x: (@geometry.x - 1) if (@geometry.x - 1) >= 0
+      @geometry.x -= 1
     end
   end
 
   def report
-    return unless @geometry.on_board
+    return unless @geometry # Ignore command unless robot is properly placed
     puts "#{@geometry.x},#{@geometry.y},#{@geometry.orientation.upcase}"
   end
 end

@@ -8,10 +8,6 @@ describe Robot do
     @robot = Robot.new(@board)
   end
 
-  it 'should have geometry' do
-    @robot.geometry.wont_be_nil
-  end
-
   let(:x_valid) { rand( 0...BOARD_WIDTH ) }
   let(:y_valid) { rand( 0...BOARD_HEIGHT) }
   let(:x_invalid) { [rand(-99..-1),
@@ -27,7 +23,7 @@ describe Robot do
       end
 
       it 'should be on board' do
-        @robot.geometry.on_board.must_equal true
+        @robot.geometry.wont_be_nil
       end
 
       it 'should have the correct value of X' do
@@ -46,12 +42,12 @@ describe Robot do
     describe 'when initially placed off board' do
       it 'should be off board when x is invalid' do
         @robot.place_at x: x_invalid, y: y_valid, orientation: orientation_valid
-        @robot.geometry.on_board.must_equal false
+        @robot.geometry.must_be_nil
       end
 
       it 'should be off board when Y is invalid' do
         @robot.place_at x: x_valid, y: y_invalid, orientation: orientation_valid
-        @robot.geometry.on_board.must_equal false
+        @robot.geometry.must_be_nil
       end
     end
   end

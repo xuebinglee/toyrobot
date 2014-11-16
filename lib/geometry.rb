@@ -1,14 +1,27 @@
+require 'board'
+
 class Geometry
   attr_reader :x, :y, :orientation
+  attr_writer :orientation
 
-  def on_board
-    # On board when none is nil
-    (@x != nil) && (@y != nil) && (@orientation != nil)
+  def initialize(opts)
+    @board = opts[:board]
+    @x = opts[:x]
+    @y = opts[:y]
+    @orientation = opts[:orientation]
+    unless (0...@board.width).cover?(@x) && # x is valid and
+           (0...@board.height).cover?(@y) # y is valid
+      raise ArgumentError, 'Geometry is off board'
+    end
   end
 
-  def set(opts)
-    @x = opts[:x] || @x
-    @y = opts[:y] || @y
-    @orientation = opts[:orientation] || @orientation
+  def x=(x)
+    return unless (0...@board.width).cover? x
+    @x = x
+  end
+
+  def y=(y)
+    return unless (0...@board.height).cover? y
+    @y = y
   end
 end

@@ -20,7 +20,6 @@ describe Parser do
     describe 'PLACE command' do
       it 'should place robot when command is valid' do
         parser.parse 'PLACE 0,1,NORTH'
-        parser.robot.geometry.on_board.must_equal true
         parser.robot.geometry.x.must_equal 0
         parser.robot.geometry.y.must_equal 1
         parser.robot.geometry.orientation.must_equal :north
@@ -28,7 +27,7 @@ describe Parser do
 
       it 'should ignore invalid command' do
         parser.parse 'PLACE 0,6,SOUTH'
-        parser.robot.geometry.on_board.must_equal false
+        parser.robot.geometry.must_be_nil
       end
     end
 
@@ -42,8 +41,7 @@ describe Parser do
       it 'should ignore command when robot is off board' do
         parser.parse 'PLACE 6,0,WEST'
         parser.parse 'LEFT'
-        parser.robot.geometry.on_board.must_equal false
-        parser.robot.geometry.orientation.must_be_nil
+        parser.robot.geometry.must_be_nil
       end
     end
 
@@ -57,8 +55,7 @@ describe Parser do
       it 'should ignore command when robot is off board' do
         parser.parse 'PLACE 6,0,WEST'
         parser.parse 'RIGHT'
-        parser.robot.geometry.on_board.must_equal false
-        parser.robot.geometry.orientation.must_be_nil
+        parser.robot.geometry.must_be_nil
       end
     end
 
