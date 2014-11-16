@@ -53,13 +53,13 @@ class Robot
   def move
     case @geometry.orientation
     when :north
-      @geometry.set y: (@geometry.y + 1)
+      @geometry.set y: (@geometry.y + 1) if (@geometry.y + 1) < @board.height
     when :south
-      @geometry.set y: (@geometry.y - 1)
+      @geometry.set y: (@geometry.y - 1) if (@geometry.y - 1) >= 0
     when :east
-      @geometry.set x: (@geometry.x + 1)
+      @geometry.set x: (@geometry.x + 1) if (@geometry.x + 1) < @board.width
     when :west
-      @geometry.set x: (@geometry.x - 1)
+      @geometry.set x: (@geometry.x - 1) if (@geometry.x - 1) >= 0
     end
   end
 

@@ -166,7 +166,33 @@ describe Robot do
     end
 
     describe 'when asked to move off board' do
-      # TODO
+      it 'should not move north on the top edge' do
+        @robot.place_at x: x_valid, y: (BOARD_HEIGHT - 1), orientation: :north
+        @robot.move
+        @robot.geometry.x.must_equal x_valid
+        @robot.geometry.y.must_equal(BOARD_HEIGHT - 1)
+      end
+
+      it 'should not move south on the bottom edge' do
+        @robot.place_at x: x_valid, y: 0, orientation: :south
+        @robot.move
+        @robot.geometry.x.must_equal x_valid
+        @robot.geometry.y.must_equal 0
+      end
+
+      it 'should not move west on the left edge' do
+        @robot.place_at x: 0, y: y_valid, orientation: :west
+        @robot.move
+        @robot.geometry.x.must_equal 0
+        @robot.geometry.y.must_equal y_valid
+      end
+
+      it 'should not move south on the bottom edge' do
+        @robot.place_at x: (BOARD_WIDTH - 1), y: y_valid, orientation: :east
+        @robot.move
+        @robot.geometry.x.must_equal(BOARD_WIDTH - 1)
+        @robot.geometry.y.must_equal y_valid
+      end
     end
   end
 end
