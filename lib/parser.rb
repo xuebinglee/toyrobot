@@ -1,4 +1,4 @@
-require 'robot'
+require_relative 'robot'
 
 class Parser
   attr_reader :robot

@@ -1,4 +1,4 @@
-require 'geometry'
+require_relative 'geometry'
 
 class Robot
   attr_reader :geometry
