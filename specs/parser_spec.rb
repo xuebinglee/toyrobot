@@ -61,5 +61,17 @@ describe Parser do
         parser.robot.geometry.orientation.must_be_nil
       end
     end
+
+    describe 'REPORT command' do
+      it 'should report X, Y, and orientation when on board' do
+        parser.parse 'PLACE 4,0,EAST'
+        lambda { parser.parse 'REPORT' }.must_output "4, 0, EAST\n"
+      end
+
+      it 'should ignore command when off board' do
+        parser.parse 'PLACE 5,0,WEST'
+        lambda { parser.parse 'REPORT' }.must_be_silent
+      end
+    end
   end
 end

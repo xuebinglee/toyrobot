@@ -17,6 +17,8 @@ class Parser
       @robot.left
     when 'RIGHT'
       @robot.right
+    when 'REPORT'
+      @robot.report
     end
   end
 
