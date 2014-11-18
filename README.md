@@ -29,3 +29,7 @@ To run tests,
 ```
 rake tests
 ```
+
+<h1>Assumptions</h1>
+- All inputs are in valid format
+- Board size does not change on the fly
