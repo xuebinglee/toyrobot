@@ -1,9 +1,11 @@
 require_relative 'spec_helper'
 require 'parser'
+require 'robot'
 
 describe Parser do
   describe '#parse' do
-    let(:parser) { Parser.new }
+    let(:robot) { Robot.build }
+    let(:parser) { Parser.new robot: robot }
 
     describe 'PLACE command' do
       it 'should place robot when command is valid' do

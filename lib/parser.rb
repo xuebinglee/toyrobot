@@ -1,11 +1,8 @@
-require_relative 'robot'
-
 class Parser
   attr_reader :robot
 
-  def initialize(opts={})
-    @board = Board.new
-    @robot = Robot.new(@board)
+  def initialize(opts)
+    @robot = opts[:robot]
   end
 
   def parse(command)

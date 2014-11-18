@@ -1,8 +1,10 @@
 #!/usr/bin/env ruby
 require_relative '../lib/parser'
+require_relative '../lib/robot'
 
 def run
-  parser = Parser.new
+  robot = Robot.build
+  parser = Parser.new robot: robot
   ARGF.each do |line|
     command = line.rstrip
     parser.parse command

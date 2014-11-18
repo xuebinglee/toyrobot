@@ -3,7 +3,8 @@ require 'parser'
 
 class MoveTest < Minitest::Unit::TestCase
   def setup
-    @p = Parser.new
+    robot = Robot.build
+    @p = Parser.new robot: robot
   end
 
   def test_turn_360_degrees_anticlockwise

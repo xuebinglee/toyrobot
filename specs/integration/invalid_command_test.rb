@@ -3,7 +3,8 @@ require 'parser'
 
 class InvalidCommandTest < Minitest::Unit::TestCase
   def setup
-    @p = Parser.new
+    robot = Robot.build
+    @p = Parser.new robot: robot
   end
 
   def test_ignore_invalid_command_in_the_beginning

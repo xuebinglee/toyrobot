@@ -1,3 +1,4 @@
+require_relative 'board'
 require_relative 'geometry'
 
 class Robot
@@ -5,8 +6,12 @@ class Robot
 
   attr_reader :geometry
 
-  def initialize(board)
-    @board = board
+  def self.build
+    new board: Board.new
+  end
+
+  def initialize(opts)
+    @board = opts[:board]
   end
 
   def place_at(opts)

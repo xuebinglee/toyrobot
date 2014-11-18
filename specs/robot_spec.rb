@@ -4,7 +4,7 @@ require 'robot'
 describe Robot do
   before do
     @board = Board.new width: BOARD_WIDTH, height: BOARD_HEIGHT
-    @robot = Robot.new(@board)
+    @robot = Robot.new board: @board
   end
 
   let(:x_valid) { rand( 0...BOARD_WIDTH ) }
