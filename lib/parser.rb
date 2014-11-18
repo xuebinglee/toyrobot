@@ -6,7 +6,8 @@ class Parser
   end
 
   def parse(line)
-    case line.rstrip.split[0]
+    line = line.rstrip
+    case line.split[0]
     when 'PLACE'
       parse_place(line)
     when 'LEFT'
