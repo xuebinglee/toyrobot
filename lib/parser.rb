@@ -8,7 +8,7 @@ class Parser
   def parse(command)
     case command.split[0]
     when 'PLACE'
-      place(command)
+      parse_place(command)
     when 'LEFT'
       @robot.turn_left
     when 'RIGHT'
@@ -21,7 +21,7 @@ class Parser
   end
 
   private
-  def place(command)
+  def parse_place(command)
     x, y, orientation = command[6..-1].split(',')
     x = x.to_i
     y = y.to_i
