@@ -1,6 +1,8 @@
 require_relative 'geometry'
 
 class Robot
+  ORIENTATIONS = [:north, :east, :south, :west] # in clockwise order
+
   attr_reader :geometry
 
   def initialize(board)
@@ -20,32 +22,17 @@ class Robot
 
   def turn_left
     return unless @geometry # Ignore command unless robot is properly placed
-    @geometry.orientation =
-      case @geometry.orientation
-      when :north
-        :west
-      when :west
-        :south
-      when :south
-        :east
-      when :east
-        :north
-      end
+    # index of previous direction in clockwise ORIENTATIONS
+    i = ORIENTATIONS.index( @geometry.orientation ) - 1
+    @geometry.orientation = ORIENTATIONS[i]
   end
 
   def turn_right
     return unless @geometry # Ignore command unless robot is properly placed
-    @geometry.orientation =
-      case @geometry.orientation
-      when :north
-        :east
-      when :east
-        :south
-      when :south
-        :west
-      when :west
-        :north
-      end
+    # index of next direction in clockwise ORIENTATIONS
+    # Left shift index by 4 so that it doesn't reach 4 which is illegal
+    i = ORIENTATIONS.index( @geometry.orientation ) + 1 - 4
+    @geometry.orientation = ORIENTATIONS[i]
   end
 
   def move
