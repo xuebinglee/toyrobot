@@ -5,10 +5,10 @@ class Parser
     @robot = opts[:robot]
   end
 
-  def parse(command)
-    case command.split[0]
+  def parse(line)
+    case line.rstrip.split[0]
     when 'PLACE'
-      parse_place(command)
+      parse_place(line)
     when 'LEFT'
       @robot.turn_left
     when 'RIGHT'
@@ -21,8 +21,8 @@ class Parser
   end
 
   private
-  def parse_place(command)
-    x, y, orientation = command[6..-1].split(',')
+  def parse_place(line)
+    x, y, orientation = line[6..-1].split(',')
     x = x.to_i
     y = y.to_i
     orientation = orientation.downcase.to_sym

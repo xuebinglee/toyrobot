@@ -6,8 +6,7 @@ def run
   robot = Robot.build
   parser = Parser.new robot: robot
   ARGF.each do |line|
-    command = line.rstrip
-    parser.parse command
+    parser.parse line
   end
 end
 
