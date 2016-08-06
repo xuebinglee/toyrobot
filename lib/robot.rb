@@ -10,49 +10,51 @@ class Robot
 
   def initialize(board:)
     @board = board
-  end
-
-  def place_at(x:, y:, orientation:)
-    @geometry = Geometry.new(board: board,
-                             x: x,
-                             y: y,
-                             orientation: orientation)
-  rescue ArgumentError # Geometry is illegal
     @geometry = nil
   end
 
+  def place_at(x:, y:, orientation:)
+    new_geometry = Geometry.new(nil, x: x, y: y, orientation: orientation)
+    @geometry = new_geometry if new_geometry.valid?(board)
+  end
+
   def turn_left
-    return unless geometry # Ignore command unless robot is properly placed
+    return unless on_board?
     # index of previous direction in clockwise ORIENTATIONS
     i = ORIENTATIONS.index(geometry.orientation) - 1
-    @geometry.orientation = ORIENTATIONS[i]
+    @geometry = Geometry.new(geometry, orientation: ORIENTATIONS[i])
   end
 
   def turn_right
-    return unless geometry # Ignore command unless robot is properly placed
+    return unless on_board?
     # index of next direction in clockwise ORIENTATIONS
     # Left shift index by 4 so that it doesn't reach 4 which is illegal
     i = ORIENTATIONS.index(geometry.orientation) + 1 - 4
-    @geometry.orientation = ORIENTATIONS[i]
+    @geometry = Geometry.new(geometry, orientation: ORIENTATIONS[i])
   end
 
   def move
-    return unless geometry # Ignore command unless robot is properly placed
-    case geometry.orientation
+    return unless on_board? # Ignore command unless robot is properly placed
+    new_geometry = case geometry.orientation
     when :north
-      @geometry.y = geometry.y + 1
+      Geometry.new(geometry, y: geometry.y + 1)
     when :south
-      @geometry.y = geometry.y - 1
+      Geometry.new(geometry, y: geometry.y - 1)
     when :east
-      @geometry.x = geometry.x + 1
+      Geometry.new(geometry, x: geometry.x + 1)
     when :west
-      @geometry.x = geometry.x - 1
+      Geometry.new(geometry, x: geometry.x - 1)
     end
+    @geometry = new_geometry if new_geometry.valid?(board)
   end
 
   def report
-    return unless geometry # Ignore command unless robot is properly placed
+    return unless on_board? # Ignore command unless robot is properly placed
     puts "#{geometry.x},#{geometry.y},#{geometry.orientation.upcase}"
+  end
+
+  def on_board?
+    !geometry.nil?
   end
 
   private

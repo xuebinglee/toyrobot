@@ -2,32 +2,24 @@ require_relative 'board'
 
 class Geometry
   attr_reader :x, :y, :orientation
-  attr_writer :orientation
 
-  def initialize(board:, x:, y:, orientation:)
-    @board, @x, @y, @orientation = board, x, y, orientation
-    raise ArgumentError, 'Geometry is illegal' if illegal_x?(x) || illegal_y?(y)
+  def initialize(geometry = nil, overrides = {})
+    @x = overrides[:x] || geometry.x
+    @y = overrides[:y] || geometry.y
+    @orientation = overrides[:orientation] || geometry.orientation
   end
 
-  def x=(new_x)
-    return if illegal_x?(new_x)
-    @x = new_x
-  end
-
-  def y=(new_y)
-    return if illegal_y?(new_y)
-    @y = new_y
+  def valid?(board)
+    x_valid?(board.width) && y_valid?(board.height)
   end
 
   private
 
-  attr_reader :board
-
-  def illegal_x?(x)
-    x < 0 || x >= board.width
+  def x_valid?(board_width)
+    x >= 0 && x < board_width
   end
 
-  def illegal_y?(y)
-    y < 0 || y >= board.height
+  def y_valid?(board_height)
+    y >= 0 && y < board_height
   end
 end

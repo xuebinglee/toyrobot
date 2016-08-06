@@ -1,26 +1,80 @@
 describe 'Geometry' do
-  subject(:geometry) do
-    Geometry.new(board: board,
-                 x: x,
-                 y: y,
-                 orientation: orientation)
-  end
-  let(:board) { @board = Board.new }
   let(:x) { 1 }
   let(:y) { 2 }
   let(:orientation) { :north }
 
   describe '#initialize' do
-    it 'assigns the correct value to x' do
-      expect(geometry.x).to eq(x)
+    context 'given no geometry' do
+      let(:geometry) { Geometry.new(nil, x: x, y: y, orientation: orientation) }
+
+      it 'correctly assigns x' do
+        expect(geometry.x).to eq(x)
+      end
+
+      it 'correctly assigns y' do
+        expect(geometry.y).to eq(y)
+      end
+
+      it 'correctly assigns orientation' do
+        expect(geometry.orientation).to eq(orientation)
+      end
     end
 
-    it 'assigns the correct value to y' do
-      expect(geometry.y).to eq(y)
+    context 'given an geometry' do
+      let(:existing) { Geometry.new(nil, x: x, y: x, orientation: orientation) }
+
+      context 'without overrides' do
+        let(:geometry) { Geometry.new(existing) }
+
+        it 'is the same as that geometry' do
+          expect(geometry.x).to eq(existing.x)
+          expect(geometry.y).to eq(existing.y)
+          expect(geometry.orientation).to eq(existing.orientation)
+        end
+      end
+
+      context 'with overrides' do
+        let(:geometry) { Geometry.new(existing, x: x_override) }
+        let(:x_override) { -1 }
+
+        it 'merges overrides with that geometry' do
+          expect(geometry.x).to eq(x_override)
+          expect(geometry.y).to eq(existing.y)
+          expect(geometry.orientation).to eq(existing.orientation)
+        end
+      end
+    end
+  end
+
+  describe '#valid?' do
+    subject(:valid?) { geometry.valid?(board) }
+    let(:geometry) { Geometry.new(nil, x: x, y: y, orientation: orientation) }
+    let(:board) { Board.new(board_width, board_height) }
+    let(:board_width)  { 5 }
+    let(:board_height) { 5 }
+
+    context 'when x is negative' do
+      let(:x) { -1 }
+
+      it { is_expected.to be(false) }
     end
 
-    it 'assigns the correct orientation' do
-      expect(geometry.orientation).to eq(orientation)
+    context 'when x is larger than board width' do
+      let(:x) { board_width + 1 }
+
+      it { is_expected.to be(false) }
+    end
+
+    context 'when y is negative' do
+      let(:y) { -1 }
+
+      it { is_expected.to be(false) }
+    end
+
+    context 'when y is larger than board height' do
+      let(:y) { board_height + 1 }
+
+      it { is_expected.to be(false) }
     end
   end
 end
