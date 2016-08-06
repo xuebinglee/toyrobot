@@ -3,13 +3,12 @@ require_relative '../lib/parser'
 require_relative '../lib/robot'
 
 def run
-  robot = Robot.build
-  parser = Parser.new robot: robot
+  board = Board.new
+  robot = Robot.new(board: board)
+  parser = Parser.new(robot: robot)
   ARGF.each do |line|
     parser.parse line
   end
 end
 
-if __FILE__ == $0
-  run
-end
+run if __FILE__ == $PROGRAM_NAME

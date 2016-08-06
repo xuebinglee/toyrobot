@@ -6,10 +6,6 @@ class Robot
 
   attr_reader :geometry
 
-  def self.build
-    new board: Board.new
-  end
-
   def initialize(board:)
     @board = board
   end

@@ -3,7 +3,7 @@ require 'parser'
 
 class SampleTest < Minitest::Test
   def setup
-    robot = Robot.build
+    robot = Robot.new(board: Board.new)
     @p = Parser.new robot: robot
   end
 

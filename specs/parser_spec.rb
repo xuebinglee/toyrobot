@@ -4,8 +4,9 @@ require 'robot'
 
 describe Parser do
   describe '#parse' do
-    let(:robot) { Robot.build }
-    let(:parser) { Parser.new robot: robot }
+    let(:parser) { Parser.new(robot: robot) }
+    let(:robot) { Robot.new(board: board) }
+    let(:board) { Board.new }
 
     describe 'PLACE command' do
       it 'should place robot when command is valid' do
@@ -52,12 +53,12 @@ describe Parser do
     describe 'REPORT command' do
       it 'should report X, Y, and orientation when on board' do
         parser.parse 'PLACE 4,0,EAST'
-        lambda { parser.parse 'REPORT' }.must_output "4,0,EAST\n"
+        -> { parser.parse 'REPORT' }.must_output "4,0,EAST\n"
       end
 
       it 'should ignore command when off board' do
         parser.parse 'PLACE 5,0,WEST'
-        lambda { parser.parse 'REPORT' }.must_be_silent
+        -> { parser.parse 'REPORT' }.must_be_silent
       end
     end
 
