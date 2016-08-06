@@ -4,24 +4,30 @@ class Geometry
   attr_reader :x, :y, :orientation
   attr_writer :orientation
 
-  def initialize(opts)
-    @board = opts[:board]
-    @x = opts[:x]
-    @y = opts[:y]
-    @orientation = opts[:orientation]
-    unless (0...@board.width).cover?(@x) && # x is valid and
-           (0...@board.height).cover?(@y) # y is valid
-      raise ArgumentError, 'Geometry is off board'
-    end
+  def initialize(board:, x:, y:, orientation:)
+    @board, @x, @y, @orientation = board, x, y, orientation
+    raise ArgumentError, 'Geometry is illegal' if illegal_x?(x) || illegal_y?(y)
   end
 
-  def x=(x)
-    return unless (0...@board.width).cover? x
-    @x = x
+  def x=(new_x)
+    return if illegal_x?(new_x)
+    @x = new_x
   end
 
-  def y=(y)
-    return unless (0...@board.height).cover? y
-    @y = y
+  def y=(new_y)
+    return if illegal_y?(new_y)
+    @y = new_y
+  end
+
+  private
+
+  attr_reader :board
+
+  def illegal_x?(x)
+    x < 0 || x >= board.width
+  end
+
+  def illegal_y?(y)
+    y < 0 || y >= board.height
   end
 end
