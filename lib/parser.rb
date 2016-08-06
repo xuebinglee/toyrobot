@@ -1,15 +1,18 @@
 class Parser
   attr_reader :robot
 
-  def initialize(opts)
-    @robot = opts[:robot]
+  def initialize(robot:)
+    @robot = robot
   end
 
   def parse(line)
     line = line.rstrip
     case line.split[0]
     when 'PLACE'
-      parse_place(line)
+      x, y, orientation = line[6..-1].split(',')
+      @robot.place_at(x: x.to_i,
+                      y: y.to_i,
+                      orientation: orientation.downcase.to_sym)
     when 'LEFT'
       @robot.turn_left
     when 'RIGHT'
@@ -19,14 +22,5 @@ class Parser
     when 'REPORT'
       @robot.report
     end
-  end
-
-  private
-  def parse_place(line)
-    x, y, orientation = line[6..-1].split(',')
-    x = x.to_i
-    y = y.to_i
-    orientation = orientation.downcase.to_sym
-    @robot.place_at x: x, y: y, orientation: orientation
   end
 end
