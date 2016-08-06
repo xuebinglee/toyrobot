@@ -1,5 +1,10 @@
 source 'https://rubygems.org'
 
-group :development do
+group :test do
   gem 'rspec'
+  gem 'simplecov', require: false
+end
+
+group :development, :test do
+  gem 'pry'
 end
