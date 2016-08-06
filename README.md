@@ -1,6 +1,8 @@
 toyrobot
 ========
 
+[ ![Codeship Status for xuebingli/toyrobot](https://codeship.com/projects/49d985c0-3de8-0134-b18d-365d6082cf0e/status?branch=master)](https://codeship.com/projects/167277)
+
 A toy robot simulator
 
 This program is developed and tested in ruby 2.1.3p242.
