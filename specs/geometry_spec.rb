@@ -3,15 +3,15 @@ require 'geometry'
 
 describe 'Geometry' do
   let(:x) { rand(BOARD_WIDTH) }
-  let(:y) { rand(BOARD_HEIGHT)}
+  let(:y) { rand(BOARD_HEIGHT) }
   let(:orientation) { ORIENTATIONS.sample }
 
   before do
-    @board = Board.new width: BOARD_WIDTH, height: BOARD_HEIGHT
-    @geometry = Geometry.new board: @board,
-      x: x,
-      y: y,
-      orientation: orientation
+    @board = Board.new(BOARD_WIDTH, BOARD_HEIGHT)
+    @geometry = Geometry.new(board: @board,
+                             x: x,
+                             y: y,
+                             orientation: orientation)
   end
 
   it 'should have the correct value of x' do

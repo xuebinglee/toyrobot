@@ -3,7 +3,7 @@ require 'board'
 
 describe Board do
   describe 'setup' do
-    let(:board) { Board.new width: BOARD_WIDTH, height: BOARD_HEIGHT }
+    let(:board) { Board.new(BOARD_WIDTH, BOARD_HEIGHT) }
 
     it 'should know its width' do
       board.width.must_equal BOARD_WIDTH

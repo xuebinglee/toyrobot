@@ -3,16 +3,20 @@ require 'robot'
 
 describe Robot do
   before do
-    @board = Board.new width: BOARD_WIDTH, height: BOARD_HEIGHT
-    @robot = Robot.new board: @board
+    @board = Board.new(BOARD_WIDTH, BOARD_HEIGHT)
+    @robot = Robot.new(board: @board)
   end
 
-  let(:x_valid) { rand( 0...BOARD_WIDTH ) }
-  let(:y_valid) { rand( 0...BOARD_HEIGHT) }
-  let(:x_invalid) { [rand(-99..-1),
-    rand(BOARD_WIDTH..(BOARD_WIDTH + 99) )].sample }
-  let(:y_invalid) { [rand(-99..-1),
-    rand(BOARD_HEIGHT..(BOARD_HEIGHT + 99))].sample }
+  let(:x_valid) { rand(0...BOARD_WIDTH) }
+  let(:y_valid) { rand(0...BOARD_HEIGHT) }
+  let(:x_invalid) do
+    [rand(-99..-1),
+     rand(BOARD_WIDTH..(BOARD_WIDTH + 99))].sample
+  end
+  let(:y_invalid) do
+    [rand(-99..-1),
+     rand(BOARD_HEIGHT..(BOARD_HEIGHT + 99))].sample
+  end
   let(:orientation_valid) { ORIENTATIONS.sample }
 
   describe '#place_at' do
@@ -53,18 +57,18 @@ describe Robot do
 
   describe '#report' do
     it 'should not print when robot is not placed' do
-      lambda{ @robot.report }.must_be_silent
+      -> { @robot.report }.must_be_silent
     end
 
     it 'should not print when robot is placed off board' do
       @robot.place_at x: x_invalid, y: y_invalid, orientation: orientation_valid
-      lambda{ @robot.report }.must_be_silent
+      -> { @robot.report }.must_be_silent
     end
 
     it 'should print current location and orientation when placed on board' do
       @robot.place_at x: x_valid, y: y_valid, orientation: orientation_valid
-      lambda { @robot.report }.must_output
-        "#{x_valid},#{y_valid},#{orientation_valid.upcase}\n"
+      -> { @robot.report }.must_output
+      "#{x_valid},#{y_valid},#{orientation_valid.upcase}\n"
     end
   end
 
@@ -122,8 +126,8 @@ describe Robot do
 
   describe '#move' do
     describe 'when asked to move on board' do
-      let(:x_inland) { rand(1...(BOARD_WIDTH-1)) }
-      let(:y_inland) { rand(1...(BOARD_HEIGHT-1)) }
+      let(:x_inland) { rand(1...(BOARD_WIDTH - 1)) }
+      let(:y_inland) { rand(1...(BOARD_HEIGHT - 1)) }
 
       it 'should move in the right direction when facing north' do
         @robot.place_at x: x_inland, y: y_inland, orientation: :north

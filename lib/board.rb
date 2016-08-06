@@ -1,11 +1,5 @@
-class Board
-  DEFAULT_WIDTH  = 5
-  DEFAULT_HEIGHT = 5
-
-  attr_reader :width, :height
-
-  def initialize(opts = {})
-    @width  = opts[:width]  || DEFAULT_WIDTH
-    @height = opts[:height] || DEFAULT_HEIGHT
+class Board < Struct.new(:width, :height)
+  def initialize(width = 5, height = 5)
+    super
   end
 end
