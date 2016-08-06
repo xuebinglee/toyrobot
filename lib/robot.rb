@@ -2,9 +2,11 @@ require_relative 'board'
 require_relative 'geometry'
 
 class Robot
+  extend Forwardable
+
   ORIENTATIONS = [:north, :east, :south, :west].freeze # in clockwise order
 
-  attr_reader :geometry
+  def_delegators :geometry, :x, :y, :orientation
 
   def initialize(board:)
     @board = board
@@ -55,5 +57,5 @@ class Robot
 
   private
 
-  attr_reader :board
+  attr_reader :board, :geometry
 end
