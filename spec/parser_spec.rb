@@ -1,24 +1,20 @@
-require_relative 'spec_helper'
-require 'parser'
-require 'robot'
-
 describe Parser do
   describe '#parse' do
-    let(:parser) { Parser.new(robot: robot) }
+    subject(:parser) { Parser.new(robot: robot) }
     let(:robot) { Robot.new(board: board) }
     let(:board) { Board.new }
 
     describe 'PLACE command' do
       it 'should place robot when command is valid' do
         parser.parse 'PLACE 0,1,NORTH'
-        parser.robot.x.must_equal 0
-        parser.robot.y.must_equal 1
-        parser.robot.orientation.must_equal :north
+        expect(robot.x).to eq(0)
+        expect(robot.y).to eq(1)
+        expect(robot.orientation).to eq(:north)
       end
 
       it 'should ignore invalid command' do
         parser.parse 'PLACE 0,6,SOUTH'
-        parser.robot.send(:geometry).must_be_nil
+        expect(robot).to_not be_on_board
       end
     end
 
@@ -26,13 +22,13 @@ describe Parser do
       it 'should turn robot left when robot is on board' do
         parser.parse 'PLACE 1,2,SOUTH'
         parser.parse 'LEFT'
-        parser.robot.orientation.must_equal :east
+        expect(robot.orientation).to eq(:east)
       end
 
       it 'should ignore command when robot is off board' do
         parser.parse 'PLACE 6,0,WEST'
         parser.parse 'LEFT'
-        parser.robot.send(:geometry).must_be_nil
+        expect(robot).to_not be_on_board
       end
     end
 
@@ -40,25 +36,29 @@ describe Parser do
       it 'should turn robot right when robot is on board' do
         parser.parse 'PLACE 1,2,SOUTH'
         parser.parse 'RIGHT'
-        parser.robot.orientation.must_equal :west
+        expect(robot.orientation).to eq(:west)
       end
 
       it 'should ignore command when robot is off board' do
         parser.parse 'PLACE 6,0,WEST'
         parser.parse 'RIGHT'
-        parser.robot.send(:geometry).must_be_nil
+        expect(robot).to_not be_on_board
       end
     end
 
     describe 'REPORT command' do
+      before { allow(STDOUT).to receive(:puts) }
+
       it 'should report X, Y, and orientation when on board' do
         parser.parse 'PLACE 4,0,EAST'
-        -> { parser.parse 'REPORT' }.must_output "4,0,EAST\n"
+        parser.parse 'REPORT'
+        expect(STDOUT).to have_received(:puts).with('4,0,EAST')
       end
 
       it 'should ignore command when off board' do
         parser.parse 'PLACE 5,0,WEST'
-        -> { parser.parse 'REPORT' }.must_be_silent
+        parser.parse 'REPORT'
+        expect(STDOUT).to_not have_received(:puts)
       end
     end
 
@@ -66,15 +66,15 @@ describe Parser do
       it 'should move robot as directed given a valid command' do
         parser.parse 'PLACE 3,0,EAST'
         parser.parse 'MOVE'
-        parser.robot.x.must_equal 4
-        parser.robot.y.must_equal 0
+        expect(robot.x).to eq(4)
+        expect(robot.y).to eq(0)
       end
 
       it 'should ignore command when off board' do
         parser.parse 'PLACE 4,0,EAST'
         parser.parse 'MOVE'
-        parser.robot.x.must_equal 4
-        parser.robot.y.must_equal 0
+        expect(robot.x).to eq(4)
+        expect(robot.y).to eq(0)
       end
     end
   end
