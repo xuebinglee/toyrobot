@@ -1,6 +1,4 @@
 class Parser
-  attr_reader :robot
-
   def initialize(robot:)
     @robot = robot
   end
