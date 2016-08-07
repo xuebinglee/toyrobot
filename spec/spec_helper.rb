@@ -1,3 +1,6 @@
+require 'simplecov'
+SimpleCov.start
+
 require 'geometry'
 require 'robot'
 require 'dispatcher'
