@@ -18,21 +18,21 @@ class Robot
   end
 
   def turn_left
-    return unless on_board?
+    return unless placed?
     # index of previous direction in clockwise ORIENTATIONS
     i = ORIENTATIONS.index(geometry.orientation) - 1
     @geometry = Geometry.new(geometry, orientation: ORIENTATIONS[i])
   end
 
   def turn_right
-    return unless on_board?
+    return unless placed?
     # index of next direction in clockwise ORIENTATIONS
     i = (ORIENTATIONS.index(geometry.orientation) + 1) % ORIENTATIONS.length
     @geometry = Geometry.new(geometry, orientation: ORIENTATIONS[i])
   end
 
   def move
-    return unless on_board?
+    return unless placed?
     new_geometry = case geometry.orientation
     when :north
       Geometry.new(geometry, y: geometry.y + 1)
@@ -47,11 +47,11 @@ class Robot
   end
 
   def report
-    return unless on_board?
+    return unless placed?
     puts "#{geometry.x},#{geometry.y},#{geometry.orientation.upcase}"
   end
 
-  def on_board?
+  def placed?
     !geometry.nil?
   end
 
