@@ -1,9 +1,6 @@
 require 'simplecov'
 SimpleCov.start
 
-require 'geometry'
-require 'robot'
-require 'dispatcher'
 require 'board'
 require 'parser'
 require 'reducer/robot'
