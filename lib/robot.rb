@@ -28,8 +28,7 @@ class Robot
   def turn_right
     return unless on_board?
     # index of next direction in clockwise ORIENTATIONS
-    # Left shift index by 4 so that it doesn't reach 4 which is illegal
-    i = ORIENTATIONS.index(geometry.orientation) + 1 - 4
+    i = (ORIENTATIONS.index(geometry.orientation) + 1) % ORIENTATIONS.length
     @geometry = Geometry.new(geometry, orientation: ORIENTATIONS[i])
   end
 
