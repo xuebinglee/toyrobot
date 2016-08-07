@@ -1,11 +1,11 @@
 describe 'Samples' do
-  let(:parser) { Parser.new(robot: robot) }
+  let(:dispatcher) { Dispatcher.new(robot: robot) }
   let(:robot) { Robot.new(board: board) }
   let(:board) { Board.new }
 
   before do
     allow(STDOUT).to receive(:puts)
-    commands.each { |command| parser.parse(command) }
+    commands.each { |command| dispatcher.parse(command) }
   end
 
   describe 'first sample' do

@@ -1,4 +1,4 @@
-class Parser
+class Dispatcher
   def initialize(robot:)
     @robot = robot
   end
@@ -8,17 +8,21 @@ class Parser
     case line.split[0]
     when 'PLACE'
       x, y, orientation = line[6..-1].split(',')
-      @robot.place_at(x: x.to_i,
-                      y: y.to_i,
-                      orientation: orientation.downcase.to_sym)
+      robot.place_at(x: x.to_i,
+                     y: y.to_i,
+                     orientation: orientation.downcase.to_sym)
     when 'LEFT'
-      @robot.turn_left
+      robot.turn_left
     when 'RIGHT'
-      @robot.turn_right
+      robot.turn_right
     when 'MOVE'
-      @robot.move
+      robot.move
     when 'REPORT'
-      @robot.report
+      robot.report
     end
   end
+
+  private
+
+  attr_reader :robot
 end
