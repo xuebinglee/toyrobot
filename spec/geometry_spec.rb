@@ -47,11 +47,8 @@ describe 'Geometry' do
   end
 
   describe '#valid?' do
-    subject(:valid?) { geometry.valid?(board) }
+    subject(:valid?) { geometry.valid? }
     let(:geometry) { Geometry.new(nil, x: x, y: y, orientation: orientation) }
-    let(:board) { Board.new(board_width, board_height) }
-    let(:board_width)  { 5 }
-    let(:board_height) { 5 }
 
     context 'when x is negative' do
       let(:x) { -1 }
@@ -60,7 +57,7 @@ describe 'Geometry' do
     end
 
     context 'when x is larger than board width' do
-      let(:x) { board_width + 1 }
+      let(:x) { Board::WIDTH + 1 }
 
       it { is_expected.to be(false) }
     end
@@ -72,7 +69,7 @@ describe 'Geometry' do
     end
 
     context 'when y is larger than board height' do
-      let(:y) { board_height + 1 }
+      let(:y) { Board::HEIGHT + 1 }
 
       it { is_expected.to be(false) }
     end

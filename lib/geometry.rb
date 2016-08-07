@@ -1,3 +1,5 @@
+require_relative 'board'
+
 class Geometry
   attr_reader :x, :y, :orientation
 
@@ -7,17 +9,17 @@ class Geometry
     @orientation = overrides[:orientation] || geometry.orientation
   end
 
-  def valid?(board)
-    x_valid?(board.width) && y_valid?(board.height)
+  def valid?
+    x_valid? && y_valid?
   end
 
   private
 
-  def x_valid?(board_width)
-    x >= 0 && x < board_width
+  def x_valid?
+    x >= 0 && x < Board::WIDTH
   end
 
-  def y_valid?(board_height)
-    y >= 0 && y < board_height
+  def y_valid?
+    y >= 0 && y < Board::HEIGHT
   end
 end

@@ -1,7 +1,6 @@
 describe 'Samples' do
   let(:dispatcher) { Dispatcher.new(robot: robot) }
-  let(:robot) { Robot.new(board: board) }
-  let(:board) { Board.new }
+  let(:robot) { Robot.new }
 
   before do
     allow(STDOUT).to receive(:puts)

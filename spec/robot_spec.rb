@@ -1,6 +1,5 @@
 describe Robot do
-  subject(:robot) { Robot.new(board: board) }
-  let(:board) { Board.new }
+  subject(:robot) { Robot.new }
   let(:x) { 1 }
   let(:y) { 2 }
   let(:orientation) { :south }
@@ -31,7 +30,7 @@ describe Robot do
 
       context 'when placed off board' do
         context 'when x is larger than board width' do
-          let(:x) { board.width + 1 }
+          let(:x) { Board::WIDTH + 1 }
 
           it 'is not on board' do
             robot.place_at(x: x, y: y, orientation: orientation)
@@ -40,7 +39,7 @@ describe Robot do
         end
 
         context 'when y is larger than board height' do
-          let(:y) { board.height + 1 }
+          let(:y) { Board::HEIGHT + 1 }
 
           it 'is not on board' do
             robot.place_at(x: x, y: y, orientation: orientation)
@@ -62,7 +61,7 @@ describe Robot do
     end
 
     context 'when robot is placed off board' do
-      let(:x) { board.width + 1 }
+      let(:x) { Board::WIDTH + 1 }
 
       it 'does not print' do
         robot.place_at(x: x, y: y, orientation: orientation)
@@ -191,10 +190,10 @@ describe Robot do
     context 'when asked to move off board' do
       context 'when on the top edge' do
         it 'does not move north' do
-          robot.place_at(x: x, y: board.height - 1, orientation: :north)
+          robot.place_at(x: x, y: Board::HEIGHT - 1, orientation: :north)
           robot.move
           expect(robot.x).to eq(x)
-          expect(robot.y).to eq(board.height - 1)
+          expect(robot.y).to eq(Board::HEIGHT - 1)
         end
       end
 
@@ -216,11 +215,11 @@ describe Robot do
         end
       end
 
-      context 'when on the bottom edge' do
-        it 'does not move south' do
-          robot.place_at(x: board.width - 1, y: y, orientation: :east)
+      context 'when on the right edge' do
+        it 'does not move east' do
+          robot.place_at(x: Board::WIDTH - 1, y: y, orientation: :east)
           robot.move
-          expect(robot.x).to eq(board.width - 1)
+          expect(robot.x).to eq(Board::WIDTH - 1)
           expect(robot.y).to eq(y)
         end
       end

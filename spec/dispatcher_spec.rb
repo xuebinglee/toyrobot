@@ -1,8 +1,7 @@
 describe Dispatcher do
   describe '#parse' do
     subject(:dispatcher) { Dispatcher.new(robot: robot) }
-    let(:robot) { Robot.new(board: board) }
-    let(:board) { Board.new }
+    let(:robot) { Robot.new }
 
     describe 'PLACE command' do
       context 'given an invliad command' do

@@ -1,11 +1,9 @@
 #!/usr/bin/env ruby
 require_relative '../lib/dispatcher'
 require_relative '../lib/robot'
-require_relative '../lib/board'
 
 def run
-  board = Board.new
-  robot = Robot.new(board: board)
+  robot = Robot.new
   dispatcher = Dispatcher.new(robot: robot)
   ARGF.each do |line|
     dispatcher.parse(line)

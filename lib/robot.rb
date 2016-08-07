@@ -8,14 +8,13 @@ class Robot
 
   def_delegators :geometry, :x, :y, :orientation
 
-  def initialize(board:)
-    @board = board
+  def initialize
     @geometry = nil
   end
 
   def place_at(x:, y:, orientation:)
     new_geometry = Geometry.new(nil, x: x, y: y, orientation: orientation)
-    @geometry = new_geometry if new_geometry.valid?(board)
+    @geometry = new_geometry if new_geometry.valid?
   end
 
   def turn_left
@@ -33,7 +32,7 @@ class Robot
   end
 
   def move
-    return unless on_board? # Ignore command unless robot is properly placed
+    return unless on_board?
     new_geometry = case geometry.orientation
     when :north
       Geometry.new(geometry, y: geometry.y + 1)
@@ -44,11 +43,11 @@ class Robot
     when :west
       Geometry.new(geometry, x: geometry.x - 1)
     end
-    @geometry = new_geometry if new_geometry.valid?(board)
+    @geometry = new_geometry if new_geometry.valid?
   end
 
   def report
-    return unless on_board? # Ignore command unless robot is properly placed
+    return unless on_board?
     puts "#{geometry.x},#{geometry.y},#{geometry.orientation.upcase}"
   end
 
@@ -58,5 +57,5 @@ class Robot
 
   private
 
-  attr_reader :board, :geometry
+  attr_reader :geometry
 end
