@@ -34,6 +34,8 @@ module Reducer
                         y: location.fetch(:y)
                       }
                     )
+                  else
+                    state
       end
       valid?(new_state) ? new_state : state
     else

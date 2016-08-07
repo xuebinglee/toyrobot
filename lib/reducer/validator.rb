@@ -7,11 +7,11 @@ module Reducer
 
   def x_valid?(state)
     x = state.fetch(:location).fetch(:x)
-    x >= 0 && x < Board::WIDTH
+    x && x >= 0 && x < Board::WIDTH
   end
 
   def y_valid?(state)
     y = state.fetch(:location).fetch(:y)
-    y >= 0 && y < Board::HEIGHT
+    y && y >= 0 && y < Board::HEIGHT
   end
 end
