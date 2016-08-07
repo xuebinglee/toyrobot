@@ -1,10 +1,12 @@
 describe 'Invalid command' do
-  let(:dispatcher) { Dispatcher.new(robot: robot) }
-  let(:robot) { Robot.new }
+  include Reducer
 
   before do
     allow(STDOUT).to receive(:puts)
-    commands.each { |command| dispatcher.parse(command) }
+    commands.reduce(Reducer::INITIAL_STATE) do |state, command|
+      action = Parser.parse(command)
+      robot(state, action)
+    end
   end
 
   describe 'invalid command in the beginning' do
