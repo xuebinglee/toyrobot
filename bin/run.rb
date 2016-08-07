@@ -1,13 +1,16 @@
 #!/usr/bin/env ruby
-require_relative '../lib/dispatcher'
-require_relative '../lib/robot'
+require_relative '../lib/parser'
+require_relative '../lib/reducer/robot'
 
-def run
-  robot = Robot.new
-  dispatcher = Dispatcher.new(robot: robot)
-  ARGF.each do |line|
-    dispatcher.parse(line)
+class ToyRobot
+  include Reducer
+
+  def run
+    ARGF.reduce(Reducer::INITIAL_STATE) do |state, line|
+      action = Parser.parse(line)
+      robot(state, action)
+    end
   end
 end
 
-run if __FILE__ == $PROGRAM_NAME
+ToyRobot.new.run if __FILE__ == $PROGRAM_NAME
