@@ -22,8 +22,10 @@ module Reducer
     when :left, :right
       state.merge(orientation: orientation(state.fetch(:orientation), action))
     when :report
-      location = state.fetch(:location)
-      puts "#{location.fetch(:x)},#{location.fetch(:y)},#{state.fetch(:orientation).upcase}"
+      if valid?(state)
+        location = state.fetch(:location)
+        puts "#{location.fetch(:x)},#{location.fetch(:y)},#{state.fetch(:orientation).upcase}"
+      end
       state
     else
       state
