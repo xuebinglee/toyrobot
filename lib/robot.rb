@@ -1,4 +1,4 @@
-require_relative 'board'
+require 'forwardable'
 require_relative 'geometry'
 
 class Robot

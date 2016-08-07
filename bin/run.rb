@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 require_relative '../lib/parser'
 require_relative '../lib/robot'
+require_relative '../lib/board'
 
 def run
   board = Board.new

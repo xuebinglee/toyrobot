@@ -1,5 +1,3 @@
-require_relative 'board'
-
 class Geometry
   attr_reader :x, :y, :orientation
 
