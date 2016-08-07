@@ -14,10 +14,10 @@ describe Dispatcher do
       end
 
       context 'given an invalid command' do
-        it 'keeps robot off board' do
-          expect(robot).to_not be_on_board
+        it 'does not place robot' do
+          expect(robot).to_not be_placed
           dispatcher.parse('PLACE 0,6,SOUTH')
-          expect(robot).to_not be_on_board
+          expect(robot).to_not be_placed
         end
       end
     end
@@ -27,7 +27,7 @@ describe Dispatcher do
         before { dispatcher.parse('PLACE 1,2,SOUTH') }
 
         it 'turns robot left' do
-          expect(robot).to be_on_board
+          expect(robot).to be_placed
           dispatcher.parse('LEFT')
           expect(robot.orientation).to eq(:east)
         end
@@ -36,10 +36,10 @@ describe Dispatcher do
       context 'when robot is placed off board' do
         before { dispatcher.parse('PLACE 6,0,WEST') }
 
-        it 'keeps robot off board' do
-          expect(robot).to_not be_on_board
+        it 'does not place robot' do
+          expect(robot).to_not be_placed
           dispatcher.parse('LEFT')
-          expect(robot).to_not be_on_board
+          expect(robot).to_not be_placed
         end
       end
     end
@@ -49,7 +49,7 @@ describe Dispatcher do
         before { dispatcher.parse('PLACE 1,2,SOUTH') }
 
         it 'turns robot right' do
-          expect(robot).to be_on_board
+          expect(robot).to be_placed
           dispatcher.parse('RIGHT')
           expect(robot.orientation).to eq(:west)
         end
@@ -58,10 +58,10 @@ describe Dispatcher do
       context 'when robot is placed off board' do
         before { dispatcher.parse('PLACE 6,0,WEST') }
 
-        it 'keeps robot off board' do
-          expect(robot).to_not be_on_board
+        it 'does not place robot' do
+          expect(robot).to_not be_placed
           dispatcher.parse('RIGHT')
-          expect(robot).to_not be_on_board
+          expect(robot).to_not be_placed
         end
       end
     end
@@ -73,7 +73,7 @@ describe Dispatcher do
         before { dispatcher.parse('PLACE 4,0,EAST') }
 
         it 'reports X, Y, and orientation' do
-          expect(robot).to be_on_board
+          expect(robot).to be_placed
           dispatcher.parse('REPORT')
           expect(STDOUT).to have_received(:puts).with('4,0,EAST')
         end
@@ -82,7 +82,7 @@ describe Dispatcher do
         before { dispatcher.parse('PLACE 5,0,WEST') }
 
         it 'ignores command' do
-          expect(robot).to_not be_on_board
+          expect(robot).to_not be_placed
           dispatcher.parse('REPORT')
           expect(STDOUT).to_not have_received(:puts)
         end

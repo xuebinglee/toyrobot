@@ -7,9 +7,9 @@ describe Robot do
   describe '#place_at' do
     describe 'initial placement' do
       context 'when placed on board' do
-        it 'is on board' do
+        it 'is placed' do
           robot.place_at(x: x, y: y, orientation: orientation)
-          expect(robot).to be_on_board
+          expect(robot).to be_placed
         end
 
         it 'has the correct value of X' do
@@ -32,18 +32,18 @@ describe Robot do
         context 'when x is larger than board width' do
           let(:x) { Board::WIDTH + 1 }
 
-          it 'is not on board' do
+          it 'is not placed' do
             robot.place_at(x: x, y: y, orientation: orientation)
-            expect(robot).to_not be_on_board
+            expect(robot).to_not be_placed
           end
         end
 
         context 'when y is larger than board height' do
           let(:y) { Board::HEIGHT + 1 }
 
-          it 'is not on board' do
+          it 'is not placed' do
             robot.place_at(x: x, y: y, orientation: orientation)
-            expect(robot).to_not be_on_board
+            expect(robot).to_not be_placed
           end
         end
       end
