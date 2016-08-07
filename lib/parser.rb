@@ -17,6 +17,8 @@ module Parser
       { type: :move }
     when 'REPORT'
       { type: :report }
+    else
+      { type: :invalid }
     end
   end
 end
