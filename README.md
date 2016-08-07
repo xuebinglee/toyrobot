@@ -3,7 +3,9 @@ toyrobot
 
 [ ![Codeship Status for xuebingli/toyrobot](https://codeship.com/projects/49d985c0-3de8-0134-b18d-365d6082cf0e/status?branch=master)](https://codeship.com/projects/167277)
 
-A toy robot simulator
+A toy robot simulator with a Redux-inspired implementation. For an OOP implementation, see [the master branch](https://github.com/xuebingli/toyrobot/tree/master).
+
+In short, the app has an initial state and consists of a few reducers. Provided with a series of commands, the app will start with the initial state and reduce those commands to the final state.
 
 This program is developed and tested in Ruby 2.3.1.
 
