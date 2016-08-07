@@ -3,7 +3,9 @@ toyrobot
 
 [ ![Codeship Status for xuebingli/toyrobot](https://codeship.com/projects/49d985c0-3de8-0134-b18d-365d6082cf0e/status?branch=master)](https://codeship.com/projects/167277)
 
-A toy robot simulator
+A toy robot simulator with an OOP implementation. For a Redux-inspired implementation, see [the redux-inspired branch](https://github.com/xuebingli/toyrobot/tree/redux-inspired).
+
+In short, whenever a new command comes in, `Dispatcher` parses it and dispatches that command to `Robot`. `Robot` manages its state via `Geometry`. `Robot` treats `Geometry` as if it was immutable.
 
 This program is developed and tested in Ruby 2.3.1.
 
