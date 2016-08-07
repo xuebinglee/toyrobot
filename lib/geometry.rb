@@ -2,26 +2,24 @@ require_relative 'board'
 
 class Geometry
   attr_reader :x, :y, :orientation
-  attr_writer :orientation
 
-  def initialize(opts)
-    @board = opts[:board]
-    @x = opts[:x]
-    @y = opts[:y]
-    @orientation = opts[:orientation]
-    unless (0...@board.width).cover?(@x) && # x is valid and
-           (0...@board.height).cover?(@y) # y is valid
-      raise ArgumentError, 'Geometry is off board'
-    end
+  def initialize(geometry = nil, overrides = {})
+    @x = overrides[:x] || geometry.x
+    @y = overrides[:y] || geometry.y
+    @orientation = overrides[:orientation] || geometry.orientation
   end
 
-  def x=(x)
-    return unless (0...@board.width).cover? x
-    @x = x
+  def valid?
+    x_valid? && y_valid?
   end
 
-  def y=(y)
-    return unless (0...@board.height).cover? y
-    @y = y
+  private
+
+  def x_valid?
+    x >= 0 && x < Board::WIDTH
+  end
+
+  def y_valid?
+    y >= 0 && y < Board::HEIGHT
   end
 end

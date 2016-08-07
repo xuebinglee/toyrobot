@@ -5,33 +5,58 @@ toyrobot
 
 A toy robot simulator
 
-This program is developed and tested in ruby 2.3.1.
+This program is developed and tested in Ruby 2.3.1.
 
-Optional
-- pry for debugging
-- simplecov for testing coverage report
+# Dependency
+All dependencies are **optional** and needed for development and testing only.
+- `pry` for debugging
+- `rspec` for testing
+- `simplecov` for testing coverage report
 
-Note that pry and simplecov are NOT needed to run the program.
+To install dependencies, run
+```shell
+$ bundle install
+```
 
 # Usage
-Input can be from a file or from standard input. To run the program with a file input,
+## Without Docker
+Please make sure Ruby 2.3.1 is installed on your machine.
 
-```
-$ ruby bin/run.rb sample.input
+Input can be provided via a file or standard input. To run the program with a file input,
+```shell
+$ ruby bin/run.rb input.file
 ```
 
-Otherwise, simple run
-
-```
+To read from standard input, simple run
+```shell
 $ ruby bin/run.rb
+PLACE 1,2,NORTH
+MOVE
+LEFT
+REPORT
+1,3,WEST
 ```
 
+## With Docker
+This program can be easily run with Ruby's offical docker image since no external dependency is needed.
+```shell
+$ docker run -it --rm -v $(pwd):/app ruby:2.3.1 /app/bin/run.rb
+PLACE 1,2,NORTH
+MOVE
+LEFT
+REPORT
+1,3,WEST
+```
+
+# Testing
 To run tests,
-
+```shell
+$ bundle exec rspec
 ```
-$ rake tests
-```
+Coverage report can be found at `coverage/index.html` after running the command above.
 
 # Assumptions
-- All inputs are in valid format
-- Board size does not change on the fly
+- Board size shall not change on the fly
+- The robot shall move freely on the board, i.e. no obstacle
+- The robot shall preserve itself and silently ignore command that results in falling off the board
+- Invalid inputs and commands shall be silently ignored
